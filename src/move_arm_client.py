@@ -29,7 +29,7 @@ class Kuka:
         rospy.init_node('listener', anonymous=False)
         rospack = rospkg.RosPack()
         rospack.list()
-        self.path = rospack.get_path('kuka_controller')
+        self.path = rospack.get_path('neon-kuka-demo')
         with open(f"{self.path}/config/config", "r") as f:
             self.config = json.load(f)
         self.client = ipfshttpclient.connect()
