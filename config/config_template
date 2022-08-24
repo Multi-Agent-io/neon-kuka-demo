@@ -1,0 +1,13 @@
+{
+    "kuka_mnemonic": "",
+    "node": "ws://127.0.0.1:9944",
+    "main_account": "",
+    "main_account_pk": "",
+    "robot_account": "",
+    "robot_account_pk": "",
+    "lighthouse_address": "",
+    "xrt_contract": "",
+    "factory_address": "",
+    "validator_address": "",
+    "validator_account_pk": ""
+}
