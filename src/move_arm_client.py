@@ -74,8 +74,9 @@ class Kuka:
         res = self.client.add(f'{self.path}/data.txt')
         rospy.loginfo(f"Data pinned to IPFS with hash {res['Hash']}")
         rospy.loginfo("Finalizing liability...")
-        p = subprocess.Popen(["node", f"{self.path}/liability/result.js", self.path, res['Hash']], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["node", f"{self.path}/liability/finalization.js", self.path, res['Hash'], self.liability_address], stdout=subprocess.PIPE)
         out = p.stdout.read()
+        rospy.loginfo(out)
         result_tx_hash = re.findall(r"0x\w*", str(out))
         rospy.loginfo(f"Finalized tx hash {result_tx_hash[0]}")
 
@@ -85,9 +86,9 @@ class Kuka:
         tx_hashes = re.findall(r"0x\w*", str(out))
         # rospy.loginfo(f"Demand tx hash: {tx_hashes[0]}")
         # rospy.loginfo(f"Offer tx hash: {tx_hashes[1]}")
-        liability_address = tx_hashes[0]
-        rospy.loginfo(f"Found new liability: {liability_address}")
-        model, objective = _check_liability_contract(self.path, liability_address)
+        self.liability_address = tx_hashes[0]
+        rospy.loginfo(f"Found new liability: {self.liability_address}")
+        model, objective = _check_liability_contract(self.path, self.liability_address)
         if model and objective:
             self.circle()
         else:
