@@ -76,8 +76,8 @@ class Kuka:
         rospy.loginfo("Finalizing liability...")
         p = subprocess.Popen(["node", f"{self.path}/liability/finalization.js", self.path, res['Hash'], self.liability_address], stdout=subprocess.PIPE)
         out = p.stdout.read()
-        rospy.loginfo(out)
         result_tx_hash = re.findall(r"0x\w*", str(out))
+        rospy.loginfo(f"Result message: {re.sub(result_tx_hash[1], '', out.decode('utf-8'))}")
         rospy.loginfo(f"Finalized tx hash {result_tx_hash[1]}")
 
     def offer_sender(self):
