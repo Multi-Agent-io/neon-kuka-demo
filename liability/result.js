@@ -21,7 +21,6 @@ web3.eth.defaultAccount = robot_account
 async function send_result(web3, result_ipfs) {
     let abi = readFileSync(`${args[0]}/liability/abi/Liability.json`)
     let json_abi = JSON.parse(abi)
-    
     let liability = await new web3.eth.Contract(json_abi, liability_address)
     const robot_private_key = json_config["robot_private_key"]
     // const result = web3.utils.randomHex(34);
