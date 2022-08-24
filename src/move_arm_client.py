@@ -80,7 +80,7 @@ class Kuka:
         rospy.loginfo(f"Finalized tx hash {result_tx_hash[0]}")
 
     def offer_sender(self):
-        p = subprocess.Popen(["node", f"{self.path}/liability/msg.js", self.path], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["node", f"{self.path}/liability/new_msg.js", self.path], stdout=subprocess.PIPE)
         out = p.stdout.read()
         tx_hashes = re.findall(r"0x\w*", str(out))
         # rospy.loginfo(f"Demand tx hash: {tx_hashes[0]}")
