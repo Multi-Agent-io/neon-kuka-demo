@@ -84,10 +84,9 @@ class Kuka:
         p = subprocess.Popen(["node", f"{self.path}/liability/new_msg.js", self.path], stdout=subprocess.PIPE)
         out = p.stdout.read()
         tx_hashes = re.findall(r"0x\w*", str(out))
-        # rospy.loginfo(f"Demand tx hash: {tx_hashes[0]}")
-        # rospy.loginfo(f"Offer tx hash: {tx_hashes[1]}")
-        self.liability_address = tx_hashes[0]
+        self.liability_address = tx_hashes[-1]
         rospy.loginfo(f"Found new liability: {self.liability_address}")
+        rospy.loginfo(re.sub(self.liability_address, '', out.decode('utf-8')))
         model, objective = _check_liability_contract(self.path, self.liability_address)
         if model and objective:
             self.circle()

@@ -1,7 +1,6 @@
 import Web3 from 'web3';
 import { readFileSync } from "fs";
 import BigNumber from "bignumber.js";
-//import { off } from 'process';
 
 const web3 = new Web3("https://proxy.devnet.neonlabs.org/solana")
 let args = process.argv.slice(2); //path to controller directory
@@ -152,7 +151,11 @@ async function liabilityCreation(web3) {
     let factory = await new web3.eth.Contract(json_abi, factory_address)
 
     let demand = await randomDemand(web3, factory)
+    console.log(`Demand message:`)
+    console.log(demand)
     let offer = await pairOffer(demand, web3, factory)
+    console.log(`Offer message:`)
+    console.log(offer)
 
     let d_encoded = encodeDemand(demand)
     let o_encoded = encodeOffer(offer)
