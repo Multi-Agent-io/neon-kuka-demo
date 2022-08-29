@@ -92,7 +92,7 @@ In config directory in kuka_control package you need to create config file with 
 Now you can run control script:
 ```bash
 source ~/catkin_ws/devel/setup.bash
-rosrun kuka_controller move_arm_client.py
+rosrun neon-kuka-demo move_arm_client.py
 ```
 ![control](media/run.png)
 
