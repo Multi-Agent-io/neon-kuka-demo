@@ -74,14 +74,14 @@ class Kuka:
         res = self.client.add(f'{self.path}/data.txt')
         rospy.loginfo(f"Data pinned to IPFS with hash {res['Hash']}")
         rospy.loginfo("Finalizing liability...")
-        p = subprocess.Popen(["node", f"{self.path}/liability/finalization.js", self.path, res['Hash'], self.liability_address], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["node", f"{self.path}/liability/liability_finalization.js", self.path, res['Hash'], self.liability_address], stdout=subprocess.PIPE)
         out = p.stdout.read()
         result_tx_hash = re.findall(r"0x\w*", str(out))
         rospy.loginfo(f"Result message: {re.sub(result_tx_hash[1], '', out.decode('utf-8'))}")
         rospy.loginfo(f"Check finalized tx hash https://neonscan.org/tx/{result_tx_hash[1]}")
 
     def offer_sender(self):
-        p = subprocess.Popen(["node", f"{self.path}/liability/new_msg.js", self.path], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["node", f"{self.path}/liability/send_liability.js", self.path], stdout=subprocess.PIPE)
         out = p.stdout.read()
         tx_hashes = re.findall(r"0x\w*", str(out))
         self.liability_address = tx_hashes[-1]
