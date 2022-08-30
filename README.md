@@ -1,5 +1,5 @@
 # Control Kuka manipulator with robonomics.
-Video with an example of work can be found [here](https://youtu.be/z55HepXbHr8)
+Video with an example of work can be found [here](https://youtu.be/fYJVF7KrNnI)
 ***
 
 ## Requirements
