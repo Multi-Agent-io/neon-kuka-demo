@@ -19,8 +19,8 @@ def _check_liability_contract(path, liability_address):
     with open(f"{path}/liability/abi/Liability.json") as f:
         abi = json.loads(f.read())    
     liability = web3.eth.contract(liability_address, abi=abi)
-    model = liability.call().model()
-    objective = liability.call().objective()
+    model = liability.functions.model().call()
+    objective = liability.functions.objective().call()
     return model, objective
 
 
@@ -78,14 +78,15 @@ class Kuka:
         out = p.stdout.read()
         result_tx_hash = re.findall(r"0x\w*", str(out))
         rospy.loginfo(f"Result message: {re.sub(result_tx_hash[1], '', out.decode('utf-8'))}")
-        rospy.loginfo(f"Finalized tx hash {result_tx_hash[1]}")
+        rospy.loginfo(f"Check finalized tx hash https://neonscan.org/tx/{result_tx_hash[1]}")
 
     def offer_sender(self):
         p = subprocess.Popen(["node", f"{self.path}/liability/new_msg.js", self.path], stdout=subprocess.PIPE)
         out = p.stdout.read()
         tx_hashes = re.findall(r"0x\w*", str(out))
         self.liability_address = tx_hashes[-1]
-        rospy.loginfo(f"Found new liability: {self.liability_address}")
+        rospy.loginfo(f"Found new liability. Check it: https://neonscan.org/address/{self.liability_address}")
+        time.sleep(5)
         rospy.loginfo(re.sub(self.liability_address, '', out.decode('utf-8')))
         model, objective = _check_liability_contract(self.path, self.liability_address)
         if model and objective:
