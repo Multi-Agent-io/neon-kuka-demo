@@ -1,13 +1,11 @@
 {
-    "kuka_mnemonic": "",
-    "node": "ws://127.0.0.1:9944",
     "main_account": "",
     "main_account_pk": "",
     "robot_account": "",
     "robot_account_pk": "",
-    "lighthouse_address": "",
-    "xrt_contract": "",
-    "factory_address": "",
-    "validator_address": "",
+    "lighthouse_address": "0x80FB5CC4c396E272b56700E6ffF5DBf4661013A8",
+    "xrt_contract": "0x3322d7D99cF65Cab5A92073c928b5E9674af3c29",
+    "factory_address": "0xCFa833bF0D46369D9024f95c9C8dFa1E4a07806C",
+    "validator_address": "0x2e46d47A84BA6cd8BD01757c895a4891F41f3Ed2",
     "validator_account_pk": ""
 }
