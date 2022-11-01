@@ -58,7 +58,6 @@ In a new window
 source ~/catkin_ws/devel/setup.bash
 rosrun manipulator_gazebo move_arm_server
 ```
-![model](media/1.png)
 ***
 ## Running ipfs
 Run ipfs daemon:
@@ -73,7 +72,6 @@ Now you can run control script:
 source ~/catkin_ws/devel/setup.bash
 rosrun neon-kuka-demo move_arm_client.py
 ```
-![control](media/run.png)
 
 
 
